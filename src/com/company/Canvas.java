@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Canvas extends Frame {
-    public List<GeometricObject> objects;
+    public List<Ball> objects;
 
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
@@ -16,7 +16,8 @@ public class Canvas extends Frame {
         objects = new ArrayList<>();
         setSize(800,600);
         setVisible(true);
-        //createBall();
+        createBall();
+        createBall();
         createBall();
 
         objects.forEach(this::add);
@@ -27,10 +28,10 @@ public class Canvas extends Frame {
         int randomRadius = random.nextInt(10) * 5 + 10;
         int randomX = random.nextInt((getWidth() - 3 * randomRadius) / 10) * 10 + randomRadius;
         int randomY = random.nextInt((getHeight() - 3 * randomRadius) / 10) * 10 + randomRadius;
-        Ball ball = new Ball(randomRadius, randomX, randomY, this);
+        Ball ball = new Ball( randomX, randomY, randomRadius, this);
 
-        for (GeometricObject obj : objects) {
-            if (!ball.equals(obj) && (ball.isCollidedWithObjectHorizontal(obj) || ball.isCollidedWithObjectVertical(obj))) {
+        for (Ball obj : objects) {
+            if (!ball.equals(obj) && (ball.isCollidedWithBall(obj))) {
                 ball = createBall();
                 return ball;
             }
