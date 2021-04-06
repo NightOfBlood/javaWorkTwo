@@ -1,8 +1,7 @@
 package com.company;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,9 +41,48 @@ public class Canvas extends Frame {
                 }
             }
         });
+
+
         //TODO: добавить клик мыши
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("mouseClicked at position:" + e.getPoint());
 
+                for (Ball object : objects) {
+                    if (object instanceof RadioBall) {
+                        ((RadioBall) object).onMouseClick(e);
+                    }
+                }
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                for (Ball object : objects) {
+                    if (object instanceof RadioBall) {
+                        ((RadioBall) object).onMouseClick(e);
+                    }
+                }
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
     }
 
     public Ball createBall(boolean isRadioBall) {
