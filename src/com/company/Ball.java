@@ -39,6 +39,7 @@ public class Ball extends Component {
         colorNumber = random.nextInt(colors.size());
     }
 
+    //Отрисовка шара и многопоточность
     public void startDraw() {
         Thread animation = new Thread(() -> {
             while (true) {
@@ -52,6 +53,7 @@ public class Ball extends Component {
         animation.start();
     }
 
+    // взаимодействие с границами
     protected void move() {
         isChanged = false;
         if (isCollideWithHorizontalBorder()) {
@@ -78,6 +80,7 @@ public class Ball extends Component {
         } else {
             for (Ball obj : canvas.objects) {
                 if (!obj.equals(this) && isCollidedWithBall(obj) && !isCollided && !obj.isChanged) {
+
                     if (obj instanceof RadioBall) {
                         dx = -dx;
                         dy = -dy;
@@ -93,7 +96,7 @@ public class Ball extends Component {
                         obj.dy = temp;
                         double v = (Math.sqrt(Math.pow(radius + obj.radius, 2)) - Math.sqrt((Math.pow(getX() + radius - obj.getX() - obj.radius, 2) + Math.pow(getY() + radius - obj.getY() - obj.radius, 2)))) + 1;
                         setLocation((int) (getX() + v * (1 - cos(getX(), getY(), obj.getX(), obj.getY()))), (int) (getY() - v * cos(getX(), getY(), obj.getX(), obj.getY())));
-                        //obj.setLocation((int)(getX()-v*(1-cos(getX(),getY(),obj.getX(),obj.getY()))), (int)(getY()+v*cos(getX(),getY(),obj.getX(),obj.getY())));
+
                         isCollided = false;
                         obj.isCollided = false;
                     }
@@ -107,11 +110,11 @@ public class Ball extends Component {
     protected boolean isCollidedWithBall(Ball ball) {
         return Math.pow(getX() + radius - ball.getX() - ball.radius, 2) + Math.pow(getY() + radius - ball.getY() - ball.radius, 2) < Math.pow(radius + ball.radius, 2);
     }
-
+    //проверка столкновения шара с горизонтальной границей границей
     protected boolean isCollideWithHorizontalBorder() {
         return getX() + getWidth() > getParent().getWidth() - canvas.getPadding() || getX() < canvas.getPadding();
     }
-
+    //проверка столкновения шара с вертикальной границей границей
     protected boolean isCollideWithVerticalBorder() {
         return getY() + getHeight() > getParent().getHeight() - canvas.getPadding() || getY() < canvas.getPadding() * 4;
     }
@@ -124,6 +127,7 @@ public class Ball extends Component {
         gg.fillOval(0, 0, 2 * radius, 2 * radius);
     }
 
+    //
     public double cos(int x1, int y1, int x2, int y2) {
         return (x1 * x2 + y1 * y2) / (Math.sqrt(x1 * x1 + y1 * y1) * Math.sqrt(x2 * x2 + y2 * y2));
     }

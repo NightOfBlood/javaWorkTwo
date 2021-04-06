@@ -31,6 +31,7 @@ public class Canvas extends Frame {
         objects.forEach(this::add);
         objects.forEach(Ball::startDraw);
 
+        // Обработка событий клавиатуры
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -42,8 +43,7 @@ public class Canvas extends Frame {
             }
         });
 
-
-        //TODO: добавить клик мыши
+        //обработка событий мышки
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -68,6 +68,8 @@ public class Canvas extends Frame {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
+
+        //обработка движения мышки
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -85,6 +87,7 @@ public class Canvas extends Frame {
         });
     }
 
+    //создание шара
     public Ball createBall(boolean isRadioBall) {
         Random random = new Random();
         int randomRadius = random.nextInt(10) * 5 + 10;
