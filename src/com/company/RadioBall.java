@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 public class RadioBall extends Ball {
 
-    //создание управляемого шара
     public RadioBall(int x, int y, int radius, Canvas canvas) {
         super(x, y, radius, canvas);
 
@@ -17,7 +16,6 @@ public class RadioBall extends Ball {
     protected Color getColor() {
         return Color.MAGENTA;
     }
-    //взаимодействие шара по нажатой клавише
     public void onKeyPressed(KeyEvent e){
         switch (e.getKeyChar()){
             case 'a':
@@ -43,7 +41,6 @@ public class RadioBall extends Ball {
 
     }
 
-    //взаимодействие шара по клику мышки
     public void onMouseClick(MouseEvent e) {
         setLocation(e.getX() - radius,e.getY() - radius );
     }

@@ -10,7 +10,6 @@ public class Canvas extends Frame {
     public List<Ball> objects;
     private int padding = 10;
 
-
     public static void main(String[] args) {
         Canvas canvas = new Canvas();
     }
@@ -21,17 +20,19 @@ public class Canvas extends Frame {
         setResizable(false);
         setVisible(true);
 
+//        createBall(false);
+//        createBall(false);
+//        createBall(false);
+//        createBall(false);
         createBall(false);
         createBall(false);
         createBall(false);
-        createBall(false);
-        createBall(false);
+
         createBall(true);
 
         objects.forEach(this::add);
         objects.forEach(Ball::startDraw);
 
-        // Обработка событий клавиатуры
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -43,7 +44,6 @@ public class Canvas extends Frame {
             }
         });
 
-        //обработка событий мышки
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -69,7 +69,6 @@ public class Canvas extends Frame {
             public void mouseExited(MouseEvent e) {}
         });
 
-        //обработка движения мышки
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -87,7 +86,6 @@ public class Canvas extends Frame {
         });
     }
 
-    //создание шара
     public Ball createBall(boolean isRadioBall) {
         Random random = new Random();
         int randomRadius = random.nextInt(10) * 5 + 10;
